@@ -17,7 +17,7 @@ unique(NEI$Pollutant)
 years=as.list(unique(NEI$year))
 names=names(summary(filter(NEI,year==1999 )$Emissions))
 df<- filter(NEI,fips == "24510")
-plot3<- ggplot(df)+geom_point(mapping = aes(x =year, y = Emissions)) + facet_grid( ~ type)+labs(title = "Emissions Types from 1999–2008 for Baltimore City")
+plot3<- ggplot(df)+geom_point(mapping = aes(x =year, y = Emissions)) + facet_grid( ~ type,shrink = TRUE)+labs(title = "Emissions Baltimore City by Emission Type from 1999–2008")
 plot3
 dev.copy(png, file = "plot3.png")
 dev.off()

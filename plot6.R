@@ -1,4 +1,5 @@
-#plot5
+#plot6 emissions from motor vehicle sources in Baltimore City with emissions from motor vehicle sources in Los Angeles County, California (fips == "06037")
+
 install.packages(c("ggplot2","dplyr"))
 library(dplyr)
 library(ggplot2)
@@ -28,7 +29,6 @@ for (sector in sectors){
     }
   }
 }
-
 MotorVehicles
 #find codes
 codesMV<-list() #should be a list of - items
@@ -41,6 +41,7 @@ length(codesMV)
 #filter data by codes - coal sector 
 #create a table from NEI and add rows 
 MVDF<-filter(NEI,SCC=="")
+
 #check for ID matches in the two data sets. - 
 #NEICodes<-unique(c(NEI$SCC))
 #for(j in codesMV ){
@@ -52,15 +53,26 @@ MVDF<-filter(NEI,SCC=="")
 # }
 #}
 #attach to MVDF
+#CA
 for(j in codesMV ){
   #print(j)
-  dataJoin<-filter(NEI,SCC==j & fips == "24510")
+  dataJoin<-filter(NEI,SCC==j & fips == "06037" )
+  #print(dataJoin)
+  MVDF<-rbind(MVDF,dataJoin)
+}
+#MA
+for(j in codesMV ){
+  #print(j)
+  dataJoin<-filter(NEI,SCC==j & fips == "24510" )
   #print(dataJoin)
   MVDF<-rbind(MVDF,dataJoin)
 }
 
 #create graph 
-plot5<-ggplot(MVDF)+geom_point(mapping = aes(x = year, y = Emissions)) + facet_grid( ~ type)+labs(title = "Emissions from Motor Vehicle Sources from 1999–2008 in Baltimore City")
-plot5
-dev.copy(png, file = "plot5.png")
+plot6<-ggplot(MVDF)+geom_point(mapping = aes(x = year, y = Emissions)) + facet_grid( fips~ type)+labs(title = "Baltimore VS Los Angeles Emissions from Motor Vehicle Sources from 1999–2008")
+plot6
+dev.copy(png, file = "plot6.png")
 dev.off()
+
+
+

@@ -56,7 +56,7 @@ for(j in codesCoal ){
 }
 
 #create graph 
-plot4<-ggplot(CoalDF)+geom_point(mapping = aes(x = year, y = Emissions)) + facet_grid( ~ type)+labs(title = "USA Emissions from Coal Combustion-related Sources from 1999–2008")
+plot4<-ggplot(CoalDF)+geom_point(mapping = aes(x = year, y = Emissions)) + facet_grid( ~ type)+labs(title = "USA Coal Combustion-related Sources Emissions 1999–2008")
 plot4
 dev.copy(png, file = "plot4.png")
 dev.off()
